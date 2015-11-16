@@ -5,6 +5,7 @@ except ImportError:
     from json import loads, dumps
 
 request_string = "http://api1.webpurify.com/services/rest/?method=webpurify.%s.%s&api_key=%s&format=json%s"
+img_request_string = "http://im-api1.webpurify.com/services/rest/?method=webpurify.%s.%s&api_key=%s&format=json%s"
 
 class Purify():
     def __init__(self, api_key, live=True):
@@ -62,13 +63,15 @@ class Purify():
         return loads(req.content)
 
     def img_check(self, img_url, custom_img_id=None, callback=None):
-        url = request_string % ("live" if self.live else "sandbox", "imgcheck", self.api_key, "&imgurl=%s%s%s" % (ds, ("&customimgid=%s" % custom_img_id if custom_img_id != None else ""), ("&callback=%s" % callback if callback != None else ""), ))
+        url = img_request_string % ("live" if self.live else "sandbox", "imgcheck", self.api_key, "&imgurl=%s%s%s" % (img_url, ("&customimgid=%s" % custom_img_id if custom_img_id != None else ""), ("&callback=%s" % callback if callback != None else ""), ))
+        print url
         req = requests.get(url)
         return loads(req.content)
 
     def img_status(self, img_id=None, custom_img_id=None):
-        if img_id == None and custom_img_id == None:
+        if img_id is None and custom_img_id is None:
             raise Exception("you must specify an img_id or custom_img_id")
-        url = request_string % ("live" if self.live else "sandbox", "imgcheck", self.api_key, ("&customimgid=%s" % custom_img_id) if custom_img_id != None else ("&imgid=%s" % "imgid"))
+        url = img_request_string % ("live" if self.live else "sandbox", "imgstatus", self.api_key, ("&customimgid=%s" % custom_img_id) if custom_img_id != None else ("&imgid=%s" % img_id))
+        print url
         req = requests.get(url)
         return loads(req.content)
