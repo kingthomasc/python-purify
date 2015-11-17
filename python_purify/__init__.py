@@ -1,2 +1,3 @@
-from word_core import WordPurify
-from img_core import ImagePurify
+from core import WordPurify as Purify
+from core import ImagePurify
+from core import WordPurify
