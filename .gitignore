@@ -1,3 +1,6 @@
 .pypirc
 *.*.swp
 *.pyc
+
+MANIFEST
+dist/
