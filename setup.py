@@ -6,7 +6,7 @@ setup(
   description = 'A python API for Web Purify',
   author = ['Tom King', 'Kory Donati'],
   author_email = ['tomk@bixly.com', 'koryd@bixly.com'],
-  url = 'https://github.com/peterldowns/mypackage ***',
+  url = 'https://github.com/kingthomasc/python-purify',
   download_url = 'https://github.com/peterldowns/mypackage/tarball/0.1 **',
   keywords = ['profanity', 'filter', 'web purify', 'webpurify'],
   classifiers = [],

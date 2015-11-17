@@ -23,7 +23,7 @@ purify = WordPurify(my_api_key)
 imgpurify = ImagePurify(my_img_api_key)
 ```
 
-The Web Purify default responce type is XML, but JSON is normally better to work with. We made
+The Web Purify default response type is XML, but JSON is normally better to work with. We made
 JSON the standard format for our package, but you can set it to XML with the rspformat variable:
 ```python
 purify = WordPurify(my_api_key, rspformat='xml')
@@ -62,7 +62,7 @@ The following WordPurify methods are included:
 * [get_blacklist](https://www.webpurify.com/documentation/methods/getblacklist/)
 * [get_whitelist](https://www.webpurify.com/documentation/methods/getwhitelist/)
 
-**Note** you should be able to set most of the options in the fuction call except for format. Format is determined at object creation. For example:
+**Note** you should be able to set most of the options in the fuction call except for format. Format is determined at WordPurify creation. In this example, rsp=1 will give us the responce time and slink=1 will tell WebPurify to flag urls:
 ```python
 purify.check('Some nice words', rsp=1, slink=1)
 ```
