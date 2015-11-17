@@ -49,6 +49,7 @@ Once setup if finished, you can simply call each method:
 ```python
 out = purify.check('Some nice words')
 print out
+# {u'rsp': {u'@attributes': {u'stat': u'ok'}, u'found': u'0', u'api_key': u'*********', u'method': u'webpurify.live.check', u'format': u'rest'}}
 ```
 The following WordPurify methods are included:
 * [check](https://www.webpurify.com/documentation/methods/check/)
