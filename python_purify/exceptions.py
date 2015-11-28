@@ -14,3 +14,7 @@ class PurifyFormatException(Exception):
     def __str__(self):
         return 'Unexpected format returned.  ' + self.message
 
+
+class PurifyExceptionTooLarge(Exception):
+    pass
+

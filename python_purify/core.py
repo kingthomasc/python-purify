@@ -3,7 +3,8 @@ from urllib import quote
 from urllib2 import urlopen
 from xml.etree import cElementTree as ET
 
-from python_purify.exceptions import PurifyFormatException, PurifyException
+from python_purify.exceptions import PurifyFormatException, PurifyException, \
+    PurifyExceptionTooLarge
 
 try:
     from simplejson import loads, dumps
@@ -42,12 +43,20 @@ class _AbstractPurifyBase(object):
         try:
             return loads(content)
         except ValueError as e:
+            if '414 Request-URI Too Large' in content:
+                raise PurifyExceptionTooLarge(
+                        'The URL was too long. Request not made.'
+                    )
             root = ET.fromstring(content)
             err = root.find('err')
             raise PurifyFormatException(err.get('msg'), code=err.get('code'))
 
     @staticmethod
     def _parse_xml(content):
+        if '414 Request-URI Too Large' in content:
+                raise PurifyExceptionTooLarge(
+                    'The URL was too long. Request not made.'
+                )
         try:
             return ET.fromstring(content)  # ET.tostring(out) to get string back.
         except ET.ParseError as e:
