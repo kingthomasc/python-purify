@@ -12,7 +12,7 @@ setup(
   author='Tom King, Kory Donati',
   author_email=['tomk@bixly.com', 'koryd@bixly.com'],
   url='https://github.com/kingthomasc/python-purify',
-  download_url='https://github.com/kingthomasc/python-purify/tarball/1.0.0',
+  download_url='https://github.com/kingthomasc/python-purify/tarball/1.0.1',
   keywords=['profanity', 'filter', 'web purify', 'webpurify'],
   classifiers=[],
 )

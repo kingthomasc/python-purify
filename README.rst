@@ -1,4 +1,3 @@
-=============
 Python Purify
 =============
 
@@ -79,7 +78,6 @@ The following WordPurify methods are included:
 
       purify.check('Some nice words', rsp=1, slink=1)
 
-####
 
 ImagePurify Methods
 ===================
