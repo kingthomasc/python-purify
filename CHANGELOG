@@ -1,0 +1,4 @@
+=== 1.2.0
+* added CHANGELOG
+* added usehttps to select protocol on class initialization
+* added VideoPurify

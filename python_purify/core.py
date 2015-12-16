@@ -12,12 +12,12 @@ except ImportError:
     from json import loads, dumps
 
 
-
 class _AbstractPurifyBase(object):
     _request_string = None
     __metaclass__ = ABCMeta
 
-    def __init__(self, api_key, live=True, rspformat='json', verbose=False):
+    def __init__(self, api_key, live=True, rspformat='json', verbose=False,
+                 usehttps=False):
         self._api_key = api_key
         self._live = live
         try:
@@ -26,6 +26,11 @@ class _AbstractPurifyBase(object):
             raise PurifyException('format must be "json" or "xml"')
         self._rspformat = rspformat.lower()
         self._verbose = verbose
+        if usehttps:
+            self._protocol = 'https'
+        else:
+            self._protocol = 'http'
+
         super(_AbstractPurifyBase, self).__init__()
 
     @staticmethod
@@ -78,6 +83,7 @@ class _AbstractPurifyBase(object):
     def _call_method(self, method, **kwargs):
         extra = self._make_options(**kwargs)
         url = self._request_string.format(
+            protocol=self._protocol,
             production="live" if self._live else "sandbox",
             method=method,
             key=self._api_key,
@@ -94,7 +100,7 @@ class _AbstractPurifyBase(object):
 
 class WordPurify(_AbstractPurifyBase):
 
-    _request_string = "http://api1.webpurify.com/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
+    _request_string = "{protocol}://api1.webpurify.com/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
 
     def check(self, text, semail=0, sphone=0, slink=0, rsp=0):
         return self._call_method('check', semail=semail, sphone=sphone,
@@ -135,7 +141,7 @@ class WordPurify(_AbstractPurifyBase):
 
 class ImagePurify(_AbstractPurifyBase):
 
-    _request_string = "http://im-api1.webpurify.com/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
+    _request_string = "{protocol}://im-api1.webpurify.com/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
 
     def img_check(self, imgurl, customimgid=None, callback=None):
         return self._call_method('imgcheck', imgurl=imgurl,
@@ -143,9 +149,27 @@ class ImagePurify(_AbstractPurifyBase):
 
     def img_status(self, imgid=None, customimgid=None):
         if imgid is None and customimgid is None:
-            raise PurifyException("you must specify an img_id or custom_img_id")
+            raise PurifyException("you must specify an imgid or customimgid")
         return self._call_method('imgstatus', imgid=imgid,
                                  customimgid=customimgid)
 
     def img_account(self):
         return self._call_method('imgaccount')
+
+
+class VideoPurify(_AbstractPurifyBase):
+
+    _request_string = "{protocol}://vid-api1.webpurify.com/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
+
+    def vid_check(self, vidurl, customvidid=None, callback=None):
+        return self._call_method('vidcheck', vidurl=vidurl,
+                                 customvidid=customvidid, callback=callback)
+
+    def vid_status(self, vidid=None, customvidid=None):
+        if vidid is None and customvidid is None:
+            raise PurifyException("you must specify an vidid or customvidid")
+        return self._call_method('vidstatus', vidid=vidid,
+                                 customvidid=customvidid)
+
+    def vid_account(self):
+        return self._call_method('vidaccount')
