@@ -29,6 +29,7 @@ Setup
     ...
     purify = WordPurify(my_api_key)
     imgpurify = ImagePurify(my_img_api_key)
+    vidpurify = VideoPurify(my_img_api_key)
 
 
 The Web Purify default response type is XML, but JSON is normally better to work with. We made
@@ -97,8 +98,18 @@ The following ImagePurify methods are included:
 
 VideoPurify
 ===========
-coming soon
------------
+
+VideoPurify works in much the same way as ImagePurify.
+
+::
+
+    out = vidpurify.vid_account()
+
+The following ImagePurify methods are included:
+
+* `vid_check <https://www.webpurify.com/video-moderation/documentation/methods/vidcheck/>`_
+* `vid_status <https://www.webpurify.com/video-moderation/documentation/methods/vidstatus/>`_
+* `vid_account <https://www.webpurify.com/video-moderation/documentation/methods/vidaccount/>`_
 
 Testing
 =======
