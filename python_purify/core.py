@@ -17,7 +17,10 @@ class _AbstractPurifyBase(object):
     __metaclass__ = ABCMeta
 
     def __init__(self, api_key, live=True, rspformat='json', verbose=False,
-                 usehttps=False):
+                 usehttps=False, base_word_url='api1.webpurify.com', base_img_url='im-api1.webpurify.com', base_vid_url='vid-api1.webpurify.com'):
+        self._base_word_url = base_word_url
+        self._base_img_url  = base_img_url
+        self._base_vid_url  = base_vid_url
         self._api_key = api_key
         self._live = live
         try:
@@ -84,6 +87,9 @@ class _AbstractPurifyBase(object):
         extra = self._make_options(**kwargs)
         url = self._request_string.format(
             protocol=self._protocol,
+            base_word_url=self._base_word_url,
+            base_img_url=self._base_img_url,
+            base_vid_url=self._base_vid_url,
             production="live" if self._live else "sandbox",
             method=method,
             key=self._api_key,
@@ -100,7 +106,7 @@ class _AbstractPurifyBase(object):
 
 class WordPurify(_AbstractPurifyBase):
 
-    _request_string = "{protocol}://api1.webpurify.com/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
+    _request_string = "{protocol}://{base_word_url}/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
 
     def check(self, text, semail=0, sphone=0, slink=0, rsp=0):
         return self._call_method('check', semail=semail, sphone=sphone,
@@ -141,7 +147,7 @@ class WordPurify(_AbstractPurifyBase):
 
 class ImagePurify(_AbstractPurifyBase):
 
-    _request_string = "{protocol}://im-api1.webpurify.com/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
+    _request_string = "{protocol}://{base_img_url}/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
 
     def img_check(self, imgurl, customimgid=None, callback=None):
         return self._call_method('imgcheck', imgurl=imgurl,
@@ -159,7 +165,7 @@ class ImagePurify(_AbstractPurifyBase):
 
 class VideoPurify(_AbstractPurifyBase):
 
-    _request_string = "{protocol}://vid-api1.webpurify.com/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
+    _request_string = "{protocol}://{base_vid_url}/services/rest/?method=webpurify.{production}.{method}&api_key={key}&format={format}{extra}"
 
     def vid_check(self, vidurl, customvidid=None, callback=None):
         return self._call_method('vidcheck', vidurl=vidurl,
