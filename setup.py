@@ -15,7 +15,7 @@ setup(
     description='A python API for Web Purify',
     long_description=long_desc,
     author='Tom King, Kory Donati',
-    author_email=['tomk@bixly.com', 'koryd@bixly.com'],
+    author_email='tomk@bixly.com, korydonati@gmail.com',
     url='https://github.com/kingthomasc/python-purify',
     download_url='https://github.com/kingthomasc/python-purify/tarball/{ver}'.format(
         ver=version_num),
