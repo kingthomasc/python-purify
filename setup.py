@@ -3,19 +3,25 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, 'LONG_DESCRIPTION.rst')) as fid:
+version_num = "1.2.0"
+
+with open(path.join(here, 'README.rst')) as fid:
   long_desc = fid.read()
 
 setup(
   name='python_purify',
   packages=['python_purify'],
-  version='1.1.0',
+  version=version_num,
   description='A python API for Web Purify',
   long_description=long_desc,
   author='Tom King, Kory Donati',
   author_email=['tomk@bixly.com', 'koryd@bixly.com'],
   url='https://github.com/kingthomasc/python-purify',
-  download_url='https://github.com/kingthomasc/python-purify/tarball/1.1.0',
+  download_url='https://github.com/kingthomasc/python-purify/tarball/{ver}}'.format(ver=version_num),
   keywords=['profanity', 'filter', 'web purify', 'webpurify'],
-  classifiers=[],
+  classifiers=[
+        "Programming Language :: Python :: 2",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
 )
