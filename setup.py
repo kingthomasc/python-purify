@@ -1,6 +1,6 @@
-from distutils.core import setup
+#from distutils.core import setup
 from os import path
-
+import setuptools
 here = path.abspath(path.dirname(__file__))
 
 version_num = "1.2.0"
@@ -8,7 +8,7 @@ version_num = "1.2.0"
 with open(path.join(here, 'README.rst')) as fid:
     long_desc = fid.read()
 
-setup(
+setuptools.setup(
     name='python_purify',
     packages=['python_purify'],
     version=version_num,
