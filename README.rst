@@ -114,4 +114,4 @@ The following ImagePurify methods are included:
 Testing
 =======
 
-We have written some basic tests for python 2.7. There have been no testing for python 3
+We have written some basic tests for python 2.7 and python 3.

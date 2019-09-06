@@ -1,10 +1,15 @@
+from __future__ import print_function
+
 from abc import ABCMeta
-from urllib import quote
-from urllib2 import urlopen
+from six.moves.urllib.parse import quote
+from six.moves.urllib.request import urlopen
 from xml.etree import cElementTree as ET
 
-from python_purify.exceptions import PurifyFormatException, PurifyException, \
+from python_purify.exceptions import (
+    PurifyFormatException,
+    PurifyException,
     PurifyExceptionTooLarge
+)
 
 try:
     from simplejson import loads, dumps
@@ -17,7 +22,8 @@ class _AbstractPurifyBase(object):
     __metaclass__ = ABCMeta
 
     def __init__(self, api_key, live=True, rspformat='json', verbose=False,
-                 usehttps=False, base_word_url='api1.webpurify.com', base_img_url='im-api1.webpurify.com', base_vid_url='vid-api1.webpurify.com'):
+                 usehttps=False, base_word_url='api1.webpurify.com',
+                 base_img_url='im-api1.webpurify.com', base_vid_url='vid-api1.webpurify.com'):
         self._base_word_url = base_word_url
         self._base_img_url  = base_img_url
         self._base_vid_url  = base_vid_url
@@ -39,7 +45,7 @@ class _AbstractPurifyBase(object):
     @staticmethod
     def _make_options(**kwargs):
         out = []
-        for key, value in kwargs.iteritems():
+        for key, value in kwargs.items():
             if value is not None:
                 envalue = quote(str(value), safe='')
                 out.append('{key}={value}'.format(key=str(key), value=envalue))
@@ -97,7 +103,7 @@ class _AbstractPurifyBase(object):
             extra=extra
         )
         if self._verbose:
-            print url
+            print(url)
 
         response = urlopen(url)
 

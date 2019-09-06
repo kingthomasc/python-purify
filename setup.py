@@ -1,14 +1,13 @@
-#from distutils.core import setup
 from os import path
-import setuptools
+from setuptools import setup
 here = path.abspath(path.dirname(__file__))
 
-version_num = "1.2.2"
+version_num = "2.0.0"
 
 with open(path.join(here, 'README.rst')) as fid:
     long_desc = fid.read()
 
-setuptools.setup(
+setup(
     name='python_purify',
     packages=['python_purify'],
     version=version_num,
@@ -22,6 +21,7 @@ setuptools.setup(
     keywords=['profanity', 'filter', 'web purify', 'webpurify'],
     classifiers=[
         "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
