@@ -2,3 +2,6 @@
 * added CHANGELOG
 * added usehttps to select protocol on class initialization
 * added VideoPurify
+
+=== 1.2.3
+* added Python3 compatibility

@@ -7,7 +7,7 @@ imgapi = '**'
 bad = 'asdf'
 good = 'That\'s a nice hat.'
 
-jpurify = WordPurify(wordapi, live=False, debug=True)
+jpurify = WordPurify(wordapi, live=False, verbose=True)
 
 
 

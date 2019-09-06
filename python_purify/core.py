@@ -1,6 +1,6 @@
 from abc import ABCMeta
-from urllib import quote
-from urllib2 import urlopen
+from six.moves.urllib.parse import quote
+from six.moves.urllib.request import urlopen
 from xml.etree import cElementTree as ET
 
 from python_purify.exceptions import PurifyFormatException, PurifyException, \
@@ -39,7 +39,7 @@ class _AbstractPurifyBase(object):
     @staticmethod
     def _make_options(**kwargs):
         out = []
-        for key, value in kwargs.iteritems():
+        for key, value in kwargs.items():
             if value is not None:
                 envalue = quote(str(value), safe='')
                 out.append('{key}={value}'.format(key=str(key), value=envalue))
@@ -97,7 +97,7 @@ class _AbstractPurifyBase(object):
             extra=extra
         )
         if self._verbose:
-            print url
+            print(url)
 
         response = urlopen(url)
 
