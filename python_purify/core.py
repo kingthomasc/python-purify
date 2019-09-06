@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from abc import ABCMeta
 from six.moves.urllib.parse import quote
 from six.moves.urllib.request import urlopen

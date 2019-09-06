@@ -2,7 +2,7 @@ from os import path
 from setuptools import setup
 here = path.abspath(path.dirname(__file__))
 
-version_num = "1.2.3"
+version_num = "2.0.0"
 
 with open(path.join(here, 'README.rst')) as fid:
     long_desc = fid.read()
