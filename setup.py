@@ -18,7 +18,7 @@ setup(
     url='https://github.com/kingthomasc/python-purify',
     download_url='https://github.com/kingthomasc/python-purify/tarball/{ver}'.format(
         ver=version_num),
-    install_requires=['abc', 'six', 'xml'],
+    install_requires=['six',],
     keywords=['profanity', 'filter', 'web purify', 'webpurify'],
     classifiers=[
         "Programming Language :: Python :: 2",
