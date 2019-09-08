@@ -25,7 +25,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    extras_require = { 
-        'test': ['mock'],
+    extras_require={
+        'test': ['mock', 'pytest', 'HTTPretty'],
     },
 )

@@ -4,6 +4,7 @@ from abc import ABCMeta
 from six.moves.urllib.parse import quote
 from six.moves.urllib.request import urlopen
 from xml.etree import cElementTree as ET
+#from urllib.request import urlopen
 
 from python_purify.exceptions import (
     PurifyFormatException,
@@ -22,11 +23,11 @@ class _AbstractPurifyBase(object):
     __metaclass__ = ABCMeta
 
     def __init__(self, api_key, live=True, rspformat='json', verbose=False,
-                 usehttps=False, base_word_url='api1.webpurify.com',
+                 usehttps=True, base_word_url='api1.webpurify.com',
                  base_img_url='im-api1.webpurify.com', base_vid_url='vid-api1.webpurify.com'):
         self._base_word_url = base_word_url
-        self._base_img_url  = base_img_url
-        self._base_vid_url  = base_vid_url
+        self._base_img_url = base_img_url
+        self._base_vid_url = base_vid_url
         self._api_key = api_key
         self._live = live
         try:
@@ -59,8 +60,8 @@ class _AbstractPurifyBase(object):
         except ValueError as e:
             if '414 Request-URI Too Large' in content:
                 raise PurifyExceptionTooLarge(
-                        'The URL was too long. Request not made.'
-                    )
+                    'The URL was too long. Request not made.'
+                )
             root = ET.fromstring(content)
             err = root.find('err')
             raise PurifyFormatException(err.get('msg'), code=err.get('code'))
@@ -68,11 +69,12 @@ class _AbstractPurifyBase(object):
     @staticmethod
     def _parse_xml(content):
         if '414 Request-URI Too Large' in content:
-                raise PurifyExceptionTooLarge(
-                    'The URL was too long. Request not made.'
-                )
+            raise PurifyExceptionTooLarge(
+                'The URL was too long. Request not made.'
+            )
         try:
-            return ET.fromstring(content)  # ET.tostring(out) to get string back.
+            # ET.tostring(out) to get string back.
+            return ET.fromstring(content)
         except ET.ParseError as e:
             root = ET.fromstring(content)
             err = root.find('err')
