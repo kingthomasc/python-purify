@@ -2,7 +2,7 @@ from os import path
 from setuptools import setup
 here = path.abspath(path.dirname(__file__))
 
-version_num = "2.0.0"
+version_num = "2.0.1"
 
 with open(path.join(here, 'README.rst')) as fid:
     long_desc = fid.read()
@@ -18,6 +18,7 @@ setup(
     url='https://github.com/kingthomasc/python-purify',
     download_url='https://github.com/kingthomasc/python-purify/tarball/{ver}'.format(
         ver=version_num),
+    install_requires=['abc', 'six', 'xml'],
     keywords=['profanity', 'filter', 'web purify', 'webpurify'],
     classifiers=[
         "Programming Language :: Python :: 2",
